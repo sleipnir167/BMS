@@ -1,0 +1,18 @@
+import { useState, useCallback } from 'react';
+
+// ============================================================
+// トースト通知カスタムフック
+// ============================================================
+
+export function useToast() {
+  const [toast, setToast] = useState(null);
+
+  const showToast = useCallback((msg, type = 'green') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3000);
+  }, []);
+
+  const hideToast = useCallback(() => setToast(null), []);
+
+  return { toast, showToast, hideToast };
+}
